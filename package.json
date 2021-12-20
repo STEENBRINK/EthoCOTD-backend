@@ -1,0 +1,28 @@
+{
+  "name": "ethocotd-backend",
+  "version": "1.0.0",
+  "description": "API and backend to EthoCOTD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEENBRINK/EthoCOTD-backend.git"
+  },
+  "author": "STEENBRINK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEENBRINK/EthoCOTD-backend/issues"
+  },
+  "homepage": "https://github.com/STEENBRINK/EthoCOTD-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.2",
+    "nodemon": "^2.0.15"
+  }
+}
