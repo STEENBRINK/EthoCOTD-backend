@@ -5,7 +5,6 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 const baseURL = ""
 
-//TODO: input validation
 const getAllEpisodes = async (req, res) => {
     const episodes = EpisodeSchema.find({}).sort({'number': 1});
 
