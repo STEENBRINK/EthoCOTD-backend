@@ -2,10 +2,10 @@
   "name": "ethocotd-backend",
   "version": "1.0.0",
   "description": "API and backend to EthoCOTD",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,9 @@
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.15"
   }
 }

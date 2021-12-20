@@ -1,17 +1,20 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
-const env = require('dotenv').config().parsed;
 const app = express();
 
 const cotdRoutes = require('./routes/cotd');
 const episodeRoutes = require('./routes/episode');
 
+//Middleware
 app.use(express.json());
 
+//Routes
 app.use('/api/cotd', cotdRoutes);
 app.use('/api/episode', episodeRoutes);
 
-mongoose.connect(env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
 db.on("error", (err)=>{console.error(err)});

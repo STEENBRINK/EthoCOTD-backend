@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const EpisodeSchema = new mongoose.Schema( {
-    name: {
+    title: {
         type: String,
         required: true
     },
-    number: {
+    episode_number: {
         type: Number,
         required: true
     },
@@ -19,7 +19,7 @@ const EpisodeSchema = new mongoose.Schema( {
         ref: 'COTD',
         required: false
     },
-    episode_link: {
+    youtube_id: {
         type: String,
         required: true
     },
