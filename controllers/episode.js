@@ -1,22 +1,12 @@
 require('dotenv').config();
 require('express');
+const objectIDchecker = require('../middleware/objectIDhandler');
 const EpisodeSchema = require('../models/episode');
-var ObjectId = require('mongoose').Types.ObjectId;
 
 const baseURL = ""
 
-const getAllEpisodes = async (req, res) => {
-    const episodes = EpisodeSchema.find({}).sort({'number': 1});
-
-    try {
-        res.status(200).json(episodes);
-    } catch(e) {
-        res.status(500).json({message: e.message});
-    }
-}
-
 const getEpisode = (req, res) => {
-    if(!isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});
+    if(!objectIDchecker.isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});
     EpisodeSchema.findById({_id:req.params.id}, (error, results) => {
         if(error){
             res.status(500).json({message: 'Finding Episode Failed'});
@@ -25,6 +15,17 @@ const getEpisode = (req, res) => {
         else if(!results) res.status(404).json({message: 'No Episode Found'})
         else res.status(200).json(results);
     });
+}
+
+const getAllEpisodes = async (req, res) => {
+    const episodes = EpisodeSchema.find({}).sort({'episode_number': 1});
+
+    try {
+        res.status(200).json(episodes);
+    } catch(e) {
+        res.status(500).json({message: 'Getting Episodes Failed'});
+        console.log(e);
+    }
 }
 
 const findEpisode = async (req, res) => {
@@ -40,9 +41,7 @@ const findEpisode = async (req, res) => {
             res.status(500).json({message: 'Searching failed'});
             console.log(error);
         } else if(!results || results.length === 0) res.status(404).json({message: 'No result found'});
-        else {
-            res.status(200).json(results)
-        }
+        else res.status(200).json(results);
     });
 }
 
@@ -81,11 +80,11 @@ const createEpisode = async (req, res) => {
 }
 
 const updateEpisode = async (req, res) => {
-    if(!isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});
+    if(!objectIDchecker.isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});
     let validation = validateFields(req.body);
     if(!validation.passed) return res.status(validation.status).json(validation.json);
 
-    EpisodeSchema.findByIdAndUpdate(req.params.id, {
+    EpisodeSchema.findByIdAndUpdate({_id: req.params.id}, {
         $set: {
             title: req.body.title,
             episode_number: req.body.episode_number,
@@ -106,7 +105,7 @@ const updateEpisode = async (req, res) => {
 }
 
 const deleteEpisode = async (req, res) => {
-    if(!isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});
+    if(!objectIDchecker.isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});
     await EpisodeSchema.findByIdAndDelete({_id:req.params.id}).then(() => {
         res.status(200).json({message: 'Deletion Succesful'});
     }).catch((e) => {
@@ -126,14 +125,10 @@ const validateFields = (body) => {
     if(body.minecraft_version && !/^((Alpha )|(Beta ))?(([1]){1}\.[0-9]{1,2})(\.[0-9]{1})?( pre-release)?$/.test(body.minecraft_version)) return {status: 400, passed: false, json: { message: 'Minecraft version invalid'}};
 
     if(body.cotd) for(cotd of body.cotd) {
-        if(!isValidObjectId(cotd)) return {status: 400, passed: false, json: { message: 'cotd not valid'}};
+        if(!objectIDchecker.isValidObjectId(cotd)) return {status: 400, passed: false, json: { message: 'cotd not valid'}};
     }
 
     return {passed: true}
-}
-
-const isValidObjectId = (id) => {
-    return (ObjectId.isValid(id) && String(new ObjectId(id)) === id);
 }
 
 module.exports = { getAllEpisodes, createEpisode, updateEpisode, deleteEpisode, getEpisode, findEpisode}

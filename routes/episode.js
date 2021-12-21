@@ -1,7 +1,7 @@
 const express = require('express');
 const episodeController = require('../controllers/episode');
-const authToken = require('../middleware/authToken')
-const headers = require('../middleware/headers')
+const authToken = require('../middleware/authToken');
+const headers = require('../middleware/headers');
 
 //router initialization
 const router = express.Router();
@@ -11,7 +11,7 @@ router.get('/', headers.checkAcceptHeader, episodeController.getAllEpisodes);
 
 router.get('/:id', headers.checkAcceptHeader, episodeController.getEpisode);
 
-router.get('/find/:searchtag?', headers.checkAcceptHeader, episodeController.findEpisode);
+router.get('/find/:searchtag', headers.checkAcceptHeader, episodeController.findEpisode);
 
 router.post('/', [authToken.verifyToken, headers.checkAcceptHeader], episodeController.createEpisode);
 

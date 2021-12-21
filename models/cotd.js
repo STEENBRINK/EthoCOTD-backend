@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const COTDSchema = new mongoose.Schema( {
-    number: {
+    cotd_number: {
         type: Number,
         required: true,
     },
-    episode: {
+    episode_id: {
         type: schema.Types.ObjectId,
         required: true
     },
@@ -16,6 +16,10 @@ const COTDSchema = new mongoose.Schema( {
     },
     user: {
         type: String, 
+        required: true
+    },
+    answer: {
+        type: String,
         required: true
     },
     _links: {
