@@ -1,0 +1,6 @@
+runtime: nodejs
+env: flex
+env_variables:
+  DATABASE_URL: "mongodb+srv://STEENBRINK:4Us0CT3WOrxj@cotd-cluster.uvrhs.mongodb.net/cotd?retryWrites=true&w=majority"
+  SECRET: "dc65ac13be952dba481434d5f716b8f8f2a29f40719b6ef4c6eef0b24ec74c8291c4a36619fff8113a3acfe9691fe65b72d50e8d7d51e6e88bfcebfa00a94249"
+  TOKEN: "156fe8def894e1087ba763e90f125da1653da94231dc931f98e5543a326039a561f63f52efec9b8ddf44a4e4b4721c72fdca628baacefcc98512da87b6c693a1"

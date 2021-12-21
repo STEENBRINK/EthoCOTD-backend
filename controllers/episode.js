@@ -3,7 +3,7 @@ require('express');
 const objectIDchecker = require('../middleware/objectIDhandler');
 const EpisodeSchema = require('../models/episode');
 
-const baseURL = ""
+const baseURL = "https://www.ethocotd.net/api/episodes/"
 
 const getEpisode = (req, res) => {
     if(!objectIDchecker.isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});

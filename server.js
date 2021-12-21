@@ -56,16 +56,16 @@ app.get('/api/documentation', (req, res) => {
                 }
             },
             get_one: {
-                discription: "Use /api/episodes/{id} to get a specific episode",
+                discription: "Use ethocotd.net/api/episodes/{id} to get a specific episode",
                 returns: "One episode as object"
             },
             get_all: {
-                discription: "Use /api/episodes/ to get all the episodes",
+                discription: "Use ethocotd.net/api/episodes/ to get all the episodes",
                 returns: "Array with episodes as objects"
             },
             get_mutiple: {
-                by_episode: "use /api/episodes/find/{episode_number} to get one episode with exactly that number",
-                by_searchtag: "use /api/episodes/find/{searchtag} to get all the episodes with the {searchtag} in the title",
+                by_episode: "use ethocotd.net/api/episodes/find/{episode_number} to get one episode with exactly that number",
+                by_searchtag: "use ethocotd.net/api/episodes/find/{searchtag} to get all the episodes with the {searchtag} in the title",
                 returns: "Array with episode(s) as object(s)"
             }
         },
@@ -102,16 +102,16 @@ app.get('/api/documentation', (req, res) => {
                 }
             },
             get_one: {
-                discription: "Use /api/cotd/{id} to get a specific comment of the day",
+                discription: "Use ethocotd.net/api/cotd/{id} to get a specific comment of the day",
                 returns: "One comment of the day as object"
             },
             get_all: {
-                discription: "Use /api/cotd/ to get all the comments of the day",
+                discription: "Use ethocotd.net/api/cotd/ to get all the comments of the day",
                 returns: "Array with comments of the day as objects"
             },
             get_mutiple: {
-                by_episode: "use /api/cotd/find/{episode_number} to get all the comments of the day for a specific episode",
-                by_searchtag: "use /api/cotd/find/{searchtag} to get all the episodes with the {searchtag} in either the comment, user or answer",
+                by_episode: "use ethocotd.net/api/cotd/find/{episode_number} to get all the comments of the day for a specific episode",
+                by_searchtag: "use ethocotd.net/api/cotd/find/{searchtag} to get all the episodes with the {searchtag} in either the comment, user or answer",
                 returns: "Array with comment(s) of the day as object(s)"
             }
         }
@@ -125,4 +125,4 @@ const db = mongoose.connection;
 db.on("error", (err)=>{console.error(err)});
 db.once("open", () => {console.log("DB started successfully")});
 
-app.listen(5000, () => {console.log("Server started: 5000")});
+app.listen(process.env.PORT, () => {});

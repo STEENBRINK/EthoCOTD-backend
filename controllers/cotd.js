@@ -4,8 +4,9 @@ const COTDSchema = require('../models/cotd');
 const EpisodeSchema = require('../models/episode');
 const objectIDhandler = require('../middleware/objectIDhandler');
 
-const baseURL = ""
-const episodeURL = ""
+const baseURL = "https://www.ethocotd.net/api/"
+const cotdURL = baseURL + "cotd/";
+const episodeURL = baseURL + "episodes/"
 
 const getCOTD = async (req, res) => {
     if(!objectIDhandler.isValidObjectId(req.params.id)) return res.status(400).json({message: req.params.id + ': is not a valid id'});
@@ -89,7 +90,7 @@ const createCOTD = async (req, res) => {
             {
                 _links: {
                     self: {
-                        href: baseURL + cotd._id
+                        href: cotdURL + cotd._id
                     },
                     episode: {
                         href: episodeURL + cotd.episode_id
