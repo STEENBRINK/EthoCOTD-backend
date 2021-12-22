@@ -21,7 +21,7 @@ const getCOTD = async (req, res) => {
 }
 
 const getAllCOTD = async (req, res) => {
-    const comments = COTDSchema.find({}).sort({'cotd_number': 1});
+    const comments = await COTDSchema.find({}).sort({'cotd_number': 1});
 
     try {
         res.status(200).json(comments);

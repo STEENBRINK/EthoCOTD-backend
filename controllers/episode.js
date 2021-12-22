@@ -18,7 +18,9 @@ const getEpisode = (req, res) => {
 }
 
 const getAllEpisodes = async (req, res) => {
-    const episodes = EpisodeSchema.find({}).sort({'episode_number': 1});
+    const episodes = await EpisodeSchema.find({}).sort({'episode_number': 1});
+
+    console.log(episodes)
 
     try {
         res.status(200).json(episodes);
