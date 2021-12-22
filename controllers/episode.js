@@ -10,7 +10,7 @@ const getEpisode = (req, res) => {
     EpisodeSchema.findById({_id:req.params.id}, (error, results) => {
         if(error){
             res.status(500).json({message: 'Finding Episode Failed'});
-            console.log(error);
+            console.error(error);
         } 
         else if(!results) res.status(404).json({message: 'No Episode Found'})
         else res.status(200).json(results);
@@ -20,13 +20,11 @@ const getEpisode = (req, res) => {
 const getAllEpisodes = async (req, res) => {
     const episodes = await EpisodeSchema.find({}).sort({'episode_number': 1});
 
-    console.log(episodes)
-
     try {
         res.status(200).json(episodes);
     } catch(e) {
         res.status(500).json({message: 'Getting Episodes Failed'});
-        console.log(e);
+        console.error(e);
     }
 }
 
@@ -41,7 +39,7 @@ const findEpisode = async (req, res) => {
     EpisodeSchema.find(query, (error, results) => {
         if(error) {
             res.status(500).json({message: 'Searching failed'});
-            console.log(error);
+            console.error(error);
         } else if(!results || results.length === 0) res.status(404).json({message: 'No result found'});
         else res.status(200).json(results);
     });
@@ -99,7 +97,7 @@ const updateEpisode = async (req, res) => {
     }, {new:true}, (error, results) => {
         if(error){
             res.status(500).json({message: 'Update Failed'});
-            console.log(error);
+            console.error(error);
         } 
         else if(!results) res.status(404).json({message: 'No Episode Found'})
         else res.status(200).json(results);
@@ -112,7 +110,7 @@ const deleteEpisode = async (req, res) => {
         res.status(200).json({message: 'Deletion Succesful'});
     }).catch((e) => {
         res.status(500).json({message: 'Deletion Failed'});
-        console.log(e);
+        console.error(e);
     });
 }
 

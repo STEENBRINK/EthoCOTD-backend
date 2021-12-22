@@ -13,7 +13,7 @@ const getCOTD = async (req, res) => {
     COTDSchema.findById({_id:req.params.id}, (error, results) => {
         if(error){
             res.status(500).json({message: 'Finding Comment Failed'});
-            console.log(error);
+            console.error(error);
         } 
         else if(!results) res.status(404).json({message: 'No Comment Found'})
         else res.status(200).json(results);
@@ -27,7 +27,7 @@ const getAllCOTD = async (req, res) => {
         res.status(200).json(comments);
     } catch(e) {
         res.status(500).json({message: 'Getting Comments Failed'});
-        console.log(e);
+        console.error(e);
     }
 }
 
@@ -40,7 +40,7 @@ const findCOTD = async (req, res) => {
         COTDSchema.find(query, (error, results) => {
             if(error) {
                 res.status(500).json({message: 'Searching failed'});
-                console.log(error);
+                console.error(error);
             } else if(!results || results.length === 0) res.status(404).json({message: 'No result found'});
             else res.status(200).json(results);
         });
@@ -52,7 +52,7 @@ const findCOTD = async (req, res) => {
         await EpisodeSchema.find(query, (error, results) => {
             if(error) {
                 res.status(500).json({message: 'Searching failed'});
-                console.log(error);
+                console.error(error);
             } else if(!results || results.length === 0) res.status(404).json({message: 'No result found'});
             else {
                 if(!results[0].cotd || results[0].cotd.length === 0) res.status(404).json({message: 'Episode does not have any COTD'});
@@ -121,7 +121,7 @@ const updateCOTD = async (req, res) => {
     }, {new:true}, (error, results) => {
         if(error){
             res.status(500).json({message: 'Update Failed'});
-            console.log(error);
+            console.error(error);
         } 
         else if(!results) res.status(404).json({message: 'No Comment Found'})
         else res.status(200).json(results);
@@ -135,7 +135,7 @@ const deleteCOTD = async (req, res) => {
         res.status(200).json({message: 'Deletion Succesful'});
     }).catch((e) => {
         res.status(500).json({message: 'Deletion Failed'});
-        console.log(e);
+        console.error(e);
     });
 }
 
@@ -170,11 +170,9 @@ const findEpisodeById = async (id) => {
 }
 
 const addCOTDtoEpisode = async (episode_id, comment_id) => {
-    console.log(episode_id, comment_id)
     EpisodeSchema.findOneAndUpdate({_id: episode_id}, {
         $push: { cotd: comment_id}
     }, {new:true}).then((res) => {
-        console.log(res)
     }).catch((e)=>{
         console.error(e);
     });
