@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const nconf = require('nconf');
 nconf.argv().env().file('keys.json');
 
-const app = express();
-
 const cotdRoutes = require('./routes/cotd');
 const episodeRoutes = require('./routes/episode');
+const headers = require('./middleware/headers');
+
+const app = express();
 
 //Middleware
 app.use(express.json());
@@ -15,8 +16,9 @@ app.use(express.json());
 //Routes
 app.use('/api/cotd', cotdRoutes);
 app.use('/api/episodes', episodeRoutes);
-app.get('/api/documentation', (req, res) => {
+app.get('/api/documentation', headers.checkAcceptHeader,(req, res) => {
     res.status(200).json({
+        general: "An Accept header with application/json is required for all requests.",
         episode: {
             structure: {
                 title: {
