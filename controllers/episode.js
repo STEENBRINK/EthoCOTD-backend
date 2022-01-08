@@ -1,4 +1,3 @@
-require('dotenv').config();
 require('express');
 const objectIDchecker = require('../middleware/objectIDhandler');
 const EpisodeSchema = require('../models/episode');

@@ -8,16 +8,16 @@ const router = express.Router();
 
 // CRUD
 //get all
-router.get('/', [headers.checkAcceptHeader], cotdController.getAllCOTD);
+router.get('/', [headers.checkAcceptHeaderForJSON], cotdController.getAllCOTD);
 
-router.get('/:id', [headers.checkAcceptHeader], cotdController.getCOTD);
+router.get('/:id', [headers.checkAcceptHeaderForJSON], cotdController.getCOTD);
 
-router.get('/find/:searchtag', [headers.checkAcceptHeader], cotdController.findCOTD);
+router.get('/find/:searchtag', [headers.checkAcceptHeaderForJSON], cotdController.findCOTD);
 
-router.post('/', [authToken.verifyToken, headers.checkAcceptHeader], cotdController.createCOTD);
+router.post('/', [authToken.verifyToken, headers.checkAcceptHeaderForJSON], cotdController.createCOTD);
 
-router.put('/:id', [authToken.verifyToken, headers.checkAcceptHeader], cotdController.updateCOTD);
+router.put('/:id', [authToken.verifyToken, headers.checkAcceptHeaderForJSON], cotdController.updateCOTD);
 
-router.delete('/:id', [authToken.verifyToken, headers.checkAcceptHeader], cotdController.deleteCOTD);
+router.delete('/:id', [authToken.verifyToken, headers.checkAcceptHeaderForJSON], cotdController.deleteCOTD);
 
 module.exports = router;

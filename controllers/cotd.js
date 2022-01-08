@@ -1,4 +1,3 @@
-require('dotenv').config();
 require('express');
 const COTDSchema = require('../models/cotd');
 const EpisodeSchema = require('../models/episode');
